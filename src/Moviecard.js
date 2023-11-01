@@ -8,11 +8,48 @@ class MovieCard extends Component {
             title:"The Avanger ",
             plot : "Supernatural power in the movies.",
             price : 199,
-            rating : 8.9
+            rating : 8.9,
+            stars : 0,
+            fav :false
         }
     }
+    addStars = ()=> {
+        //first form of setstate
+        // this.setState({
+        //     stars : this.state.stars +0.5
+        // })
+
+        //second form of setstate  
+
+        this.setState((prevState)=>{
+            return{
+                stars: prevState.stars +0.5
+            }
+        })
+    }
+    
+    subStars = () =>{
+        if(this.state.stars <= 0){
+            return;
+          }
+
+        this.setState((prevState)=>{
+            return{
+                
+               stars: prevState.stars -0.5
+            }
+        })
+    }
+
+    handleFav = () => {
+        this.setState({
+            fav :! this.state.fav
+        })
+        
+    }
+
     render() {
-        const {title,plot,price,rating} = this.state;
+        const {title,plot,price,rating,stars,fav} = this.state;
         return (
             <div className="main">
                 <div className="movie-card">
@@ -31,13 +68,14 @@ class MovieCard extends Component {
                             <div className="rating">{rating}</div>
 
                             <div className="star-dis">
-                                <img  alt="decrease" src="https://cdn-icons-png.flaticon.com/128/56/56889.png" className="str-btn"/>
+                                <img  alt="decrease" src="https://cdn-icons-png.flaticon.com/128/56/56889.png" className="str-btn" onClick={this.subStars}/>
                                 <img  alt="star" src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" className="stars"/>
-                                <img  alt="increase" src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png" className="str-btn"/>
-                                <span>0</span>
+                                <img  alt="increase" src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png" className="str-btn" onClick={this.addStars}/>
+                                <span>{stars}</span>
                             </div>
 
-                            <button className="favourite-btn">Favourite</button>
+                            {fav ?<button className="favourite-btn" onClick={this.handleFav}>Favourite</button>:<button className="unfavourite-btn" onClick={this.handleFav}>Un-favourite</button>}
+
                             <button className="cart-btn">Add to cart</button>
                             
                         </div>
