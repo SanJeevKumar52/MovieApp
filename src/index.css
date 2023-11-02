@@ -116,6 +116,11 @@ body {
         margin: 5px;
       
   }
+  .Removecart-btn{
+    background-color: #b11b1e;
+        color: #fff;
+        margin: 5px;
+  }
   .unfavourite-btn {
     background-color: #db2828;
     color: #fff;
