@@ -1,20 +1,10 @@
 import { Component } from "react";
 
 class MovieCard extends Component {
-    constructor(){
-        super();
-
-        this.state ={
-            title:"The Avanger ",
-            plot : "Supernatural power in the movies.",
-            price : 199,
-            rating : 8.9,
-            stars : 0,
-            fav :false,
-            cart :false
-        }
-    }
-    addStars = ()=> {
+   
+   
+    
+   /*  addStars = ()=> {
         //first form of setstate
         // this.setState({
         //     stars : this.state.stars +0.5
@@ -28,8 +18,8 @@ class MovieCard extends Component {
             }
         })
     }
-    
-    subStars = () =>{
+
+     subStars = () =>{
         if(this.state.stars <= 0){
             return;
           }
@@ -54,9 +44,10 @@ class MovieCard extends Component {
             cart : !this.state.cart
         })
     }
-
+ */
     render() {
-        const {title,plot,price,rating,stars,fav,cart} = this.state;
+        
+        const {title,plot,price,rating,stars,fav,cart} = this.props.movies;
         return (
             <div className="main">
                 <div className="movie-card">
@@ -75,9 +66,9 @@ class MovieCard extends Component {
                             <div className="rating">{rating}</div>
 
                             <div className="star-dis">
-                                <img  alt="decrease" src="https://cdn-icons-png.flaticon.com/128/56/56889.png" className="str-btn" onClick={this.subStars}/>
+                                <img  alt="decrease" src="https://cdn-icons-png.flaticon.com/128/56/56889.png" className="str-btn" onClick={()=> {this.props.decStars(this.props.movies)}}/>
                                 <img  alt="star" src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" className="stars"/>
-                                <img  alt="increase" src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png" className="str-btn" onClick={this.addStars}/>
+                                <img  alt="increase" src="https://cdn-icons-png.flaticon.com/128/3524/3524388.png" className="str-btn" onClick={() => {this.props.addStars(this.props.movies)}}/>
                                 <span>{stars}</span>
                             </div>
 
