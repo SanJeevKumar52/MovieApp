@@ -9,7 +9,7 @@ class MovieList extends Component {
 
         this.state = {
             movies: [
-                {
+                {   id :1,
                     title: 'The Avengers',
                     plot:
                         "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
@@ -21,7 +21,7 @@ class MovieList extends Component {
                     fav: false,
                     cart: false
                 },
-                {
+                {   id :2,
                     title: 'The Dark Knight',
                     plot:
                         'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.',
@@ -33,7 +33,7 @@ class MovieList extends Component {
                     fav: false,
                     cart: false
                 },
-                {
+                {   id :3,
                     title: 'Iron Man',
                     plot:
                         'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',
@@ -48,38 +48,67 @@ class MovieList extends Component {
         }
     }
 
-    
 
-    handleIncStar = (movie) =>{
-      const {movies} = this.state;
 
-      const mid = movies.indexOf(movie);
-
-      /* if(this.state.stars >=5){
-        return ;
-      } */
-
-      movies[mid].stars += 0.5;
-
-      this.setState({
-        movies : movies
-
-      })
-    }
-    
-    handleDecstar = (movie) =>{
-        const {movies} = this.state;
+    handleIncStar = (movie) => {
+        const { movies } = this.state;
 
         const mid = movies.indexOf(movie);
 
-         movies[mid].stars -= 0.5;
+        if(movies[mid].stars >=5){
+            return;
+         }
 
-         this.setState({
-            movies : movies
-    
-          })
+        movies[mid].stars += 0.5;
+
+        this.setState({
+            movies: movies
+
+        })
+    }
+
+    handleDecstar = (movie) => {
+        const { movies } = this.state;
+
+        const mid = movies.indexOf(movie);
+
+        if(movies[mid].stars <=0){
+            return;
+         }
+        
+
+        movies[mid].stars -= 0.5;
+
+        this.setState({
+            movies: movies
+
+        })
 
     }
+
+    handleToggleFav = (movie)=> {
+        const {movies} = this.state;
+        const movieId = movies.indexOf(movie);
+    
+        movies[movieId].fav = !movies[movieId].fav;
+    
+        this.setState({
+            movies
+        })
+      }
+    
+      handleAddtocart = (movie)=> {
+        const {movies} = this.state;
+        const movieId = movies.indexOf(movie);
+    
+        movies[movieId].cart = !movies[movieId].cart;
+    
+        this.setState({
+            movies
+        })
+      }
+
+    
 
 
     render() {
@@ -87,8 +116,12 @@ class MovieList extends Component {
         const { movies } = this.state;
         return (
             <>
-                {movies.map((movie) => <MovieCard movies={movie}   addStars = {this.handleIncStar} 
-                                                                   decStars = {this.handleDecstar}                                />)}
+                {movies.map((movie) => <MovieCard movies={movie} addStars={this.handleIncStar}
+                    decStars={this.handleDecstar}
+                    handleFav={this.handleToggleFav}
+                    toggleCart = {this.handleAddtocart}
+
+               Key ={movie.id} />)}
 
             </>
         )
