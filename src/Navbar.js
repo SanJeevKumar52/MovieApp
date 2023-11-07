@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const Nav = styled.div`
 width: 100%;
     height: 70px;
@@ -49,6 +50,7 @@ const CartCount = styled.span`
 
 class Navbar extends React.Component {
     render() {
+       let {cartCount} = this.props;
         return (
             <>
 
@@ -56,7 +58,7 @@ class Navbar extends React.Component {
                     <Title>Movie-App</Title>
                     <CartContainer>
                         <CartIcon alt="cart icon" src ="https://cdn-icons-png.flaticon.com/128/3144/3144456.png"  />
-                        <CartCount color="yellow" show ={true}>3</CartCount>
+                        <CartCount color="yellow" show ={true}>{cartCount}</CartCount>
                     </CartContainer>
                 </Nav>
 
